@@ -93,6 +93,16 @@ function dissectPlaintext(plaintext, interval) {
   return result;
 }
 
+function findPosition(matrix, char) {
+  for (let row = 0; row < matrix.length; row++) {
+    let col = matrix[row].indexOf(char);
+    if (col !== -1) {
+      return [row, col];
+    }
+  }
+  return null;
+}
+
 function encrypt(plaintext) {
   let matrix = create5x5Matrix(keyword);
   let cleanedText = plaintext
@@ -103,29 +113,18 @@ function encrypt(plaintext) {
   let result = "";
 
   for (let pair of digrams) {
-    //prettier-ignore
-    let temp1 = null;
-    let temp2 = null;
-    for (let row = 0; row < matrix.length; row++) {
-      for (let col = 0; col < matrix[row].length; col++) {
-        if (matrix[row][col] === pair[0]) {
-          temp1 = [row, col];
-        }
-        if (matrix[row][col] === pair[1]) {
-          temp2 = [row, col];
-        }
-      }
-    }
+    let [r1, c1] = findPosition(matrix, pair[0]);
+    let [r2, c2] = findPosition(matrix, pair[1]);
 
-    if (temp1[0] !== temp2[0] && temp1[1] !== temp2[1]) {
-      result += matrix[temp1[0]][temp2[1]];
-      result += matrix[temp2[0]][temp1[1]];
-    } else if (temp1[0] == temp2[0]) {
-      result += matrix[temp1[0]][(temp1[1] + 1) % 5];
-      result += matrix[temp2[0]][(temp2[1] + 1) % 5];
-    } else if (temp1[1] == temp2[1]) {
-      result += matrix[(temp1[0] + 1) % 5][temp1[1]];
-      result += matrix[(temp2[0] + 1) % 5][temp2[1]];
+    if (r1 !== r2 && c1 !== c2) {
+      result += matrix[r1][c2];
+      result += matrix[r2][c1];
+    } else if (r1 == r2) {
+      result += matrix[r1][(c1 + 1) % 5];
+      result += matrix[r2][(c2 + 1) % 5];
+    } else if (c1 == c2) {
+      result += matrix[(r1 + 1) % 5][c1];
+      result += matrix[(r2 + 1) % 5][c2];
     }
   }
   return result;
