@@ -1,6 +1,3 @@
-let keyword = "HIMALAYAS";
-let plaintext = "NOTIFICATION";
-
 function generateMatrixAlphabet() {
   const alphabet = [];
 
@@ -97,7 +94,7 @@ function findPosition(matrix, char) {
   return null;
 }
 
-function encrypt(plaintext) {
+function encrypt(plaintext, keyword) {
   let matrix = create5x5Matrix(keyword);
   let cleanedText = plaintext
     .replace(/[^A-Z]/gi, "")
