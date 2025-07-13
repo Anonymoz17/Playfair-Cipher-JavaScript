@@ -1,5 +1,5 @@
-let keyword = "MONOLITHIC";
-let plaintext = "BALLOON DELIVERY BOX";
+let keyword = "HIMALAYAS";
+let plaintext = "NOTIFICATION";
 
 function generateMatrixAlphabet() {
   const alphabet = [];
@@ -54,12 +54,7 @@ function create5x5Matrix(keyword) {
 }
 
 function pickFillerChar(letter) {
-  const fillerChars = ["X", "Q"];
-
-  if (letter === "X") return "Q";
-  if (letter === "Q") return "X";
-
-  return "X";
+  return letter === "X" ? "Q" : "X";
 }
 
 function breakupDuplicatesInDigrams(str) {
