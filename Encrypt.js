@@ -53,21 +53,16 @@ function create5x5Matrix(keyword) {
   return matrix;
 }
 
-function pickFillerChar(str) {
-  const fillerChars = ["X", "Z", "Q"];
-  const usedChars = str.split("");
+function pickFillerChar(letter) {
+  const fillerChars = ["X", "Q"];
 
-  for (let filler of fillerChars) {
-    if (!usedChars.includes(filler)) {
-      return filler;
-    }
-  }
+  if (letter === "X") return "Q";
+  if (letter === "Q") return "X";
 
   return "X";
 }
 
 function breakupDuplicatesInDigrams(str) {
-  let filler = pickFillerChar(str);
   let result = "";
 
   for (let i = 0; i < str.length; i += 2) {
@@ -75,9 +70,9 @@ function breakupDuplicatesInDigrams(str) {
     let second = str[i + 1];
 
     if (!second) {
-      result += first + filler;
+      result += first + pickFillerChar(first);
     } else if (first === second) {
-      result += first + filler;
+      result += first + pickFillerChar(first);
       i--;
     } else {
       result += first + second;
@@ -87,6 +82,7 @@ function breakupDuplicatesInDigrams(str) {
   return result;
 }
 
+// slicing text in intervals
 function dissectPlaintext(plaintext, interval) {
   let plaintextArray = plaintext.replaceAll(" ", "").split("");
   let result = [];
