@@ -15,7 +15,10 @@ function generateMatrixAlphabet() {
 }
 
 function appendRemainingAlphabet(keyword) {
-  keyword = keyword.toUpperCase().replace(/J/g, "I");
+  keyword = keyword
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "") // removes anything not A–Z
+    .replace(/J/g, "I");
   const seen = new Set();
   const result = [];
 
@@ -130,4 +133,4 @@ function encrypt(plaintext) {
   return result;
 }
 
-console.log(encrypt(plaintext));
+module.exports = { encrypt };
