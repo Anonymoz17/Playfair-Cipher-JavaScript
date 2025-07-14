@@ -110,10 +110,10 @@ function encrypt(plaintext, keyword) {
     if (r1 !== r2 && c1 !== c2) {
       result += matrix[r1][c2];
       result += matrix[r2][c1];
-    } else if (r1 == r2) {
+    } else if (r1 === r2) {
       result += matrix[r1][(c1 + 1) % 5];
       result += matrix[r2][(c2 + 1) % 5];
-    } else if (c1 == c2) {
+    } else if (c1 === c2) {
       result += matrix[(r1 + 1) % 5][c1];
       result += matrix[(r2 + 1) % 5][c2];
     }
