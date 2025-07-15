@@ -75,11 +75,11 @@ function breakupDuplicatesInDigrams(str) {
 }
 
 // slicing text in intervals
-function dissectPlaintext(plaintext, interval) {
-  let plaintextArray = plaintext.replaceAll(" ", "").split("");
+function dissectText(text, interval) {
+  let textArray = text.replaceAll(" ", "").split("");
   let result = [];
-  for (let i = 0; i < plaintextArray.length; i += interval) {
-    result.push(plaintextArray.slice(i, i + interval));
+  for (let i = 0; i < textArray.length; i += interval) {
+    result.push(textArray.slice(i, i + interval));
   }
   return result;
 }
@@ -100,7 +100,7 @@ function encrypt(plaintext, keyword) {
     .replace(/[^A-Z]/gi, "")
     .toUpperCase()
     .replace(/J/g, "I");
-  let digrams = dissectPlaintext(breakupDuplicatesInDigrams(cleanedText), 2);
+  let digrams = dissectText(breakupDuplicatesInDigrams(cleanedText), 2);
   let result = "";
 
   for (let pair of digrams) {
@@ -121,4 +121,4 @@ function encrypt(plaintext, keyword) {
   return result;
 }
 
-module.exports = { encrypt };
+module.exports = { encrypt, findPosition, dissectText, create5x5Matrix, breakupDuplicatesInDigrams };
