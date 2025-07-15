@@ -1,4 +1,4 @@
-const readline = require("readline");
+const readline = require("readline/promises");
 const { encrypt } = require("./encrypt.js");
 
 const rl = readline.createInterface({
@@ -6,10 +6,10 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Enter the keyword: ", (keyword) => {
-  rl.question("Enter the plaintext: ", (plaintext) => {
-    const ciphertext = encrypt(plaintext, keyword);
-    console.log("Encrypted text:", ciphertext);
-    rl.close();
-  });
-});
+(async () => {
+  const keyword = await rl.question("Enter the keyword: ");
+  const plaintext = await rl.question("Enter the plaintext: ");
+  const ciphertext = encrypt(plaintext, keyword);
+  console.log("Encrypted text: ", ciphertext);
+  rl.close();
+})();
