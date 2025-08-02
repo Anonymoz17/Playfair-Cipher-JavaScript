@@ -1,4 +1,4 @@
-const { findPosition, create5x5Matrix, dissectText } = require("./encrypt.js");
+const { findPosition, create5x5Matrix, dissectText } = require("./helpers.js");
 
 function mod(n, m) {
     return ((n % m) + m) % m;
