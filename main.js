@@ -30,7 +30,9 @@ const rl = readline.createInterface({
       const fileContent = await fs.readFile(inputPath, "utf-8");
       const output = choice === "3" ? encrypt(fileContent, keyword) : decrypt(fileContent, keyword);
       await fs.writeFile(outputPath, output, "utf-8");
-      console.log(`\n${choice === "3" ? "Encrypted" : "Decrypted"} content written to: ${outputPath}`);
+      console.log(
+        `\n${choice === "3" ? "Encrypted" : "Decrypted"} content written to: ${outputPath}`
+      );
     } catch (err) {
       console.error("File error:", err.message);
     }

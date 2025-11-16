@@ -8,8 +8,8 @@ function breakupDuplicatesInDigrams(str) {
   let result = "";
 
   for (let i = 0; i < str.length; i += 2) {
-    let first = str[i];
-    let second = str[i + 1];
+    const first = str[i];
+    const second = str[i + 1];
 
     if (!second) {
       result += first + pickFillerChar(first);
@@ -25,17 +25,17 @@ function breakupDuplicatesInDigrams(str) {
 }
 
 function encrypt(plaintext, keyword) {
-  let matrix = create5x5Matrix(keyword);
-  let cleanedText = plaintext
+  const matrix = create5x5Matrix(keyword);
+  const cleanedText = plaintext
     .replace(/[^A-Z]/gi, "")
     .toUpperCase()
     .replace(/J/g, "I");
-  let digrams = dissectText(breakupDuplicatesInDigrams(cleanedText), 2);
+  const digrams = dissectText(breakupDuplicatesInDigrams(cleanedText), 2);
   let result = "";
 
-  for (let pair of digrams) {
-    let [r1, c1] = findPosition(matrix, pair[0]);
-    let [r2, c2] = findPosition(matrix, pair[1]);
+  for (const pair of digrams) {
+    const [r1, c1] = findPosition(matrix, pair[0]);
+    const [r2, c2] = findPosition(matrix, pair[1]);
 
     if (r1 !== r2 && c1 !== c2) {
       result += matrix[r1][c2];
